@@ -46,11 +46,26 @@ Route::get('/commercials', 'App\Http\Controllers\CommercialController@index')->n
 //routes finances
 Route::get('/finances', 'App\Http\Controllers\FinanceController@index')->name('finances.index');
 
-//routes scan
-
-
-
 
 //Routes auth
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route groupe users
+Route::get('/groups/{group}', 'App\Http\Controllers\groupe_userController@show')->name('groups.show');
+Route::PUT('groups/${groupe}', 'App\Http\Controllers\groupe_userController@update')->name('groups.update');
+Route::resource('/groupe', groupe_userController::class);
+Route::resource('/rolee', roleController::class);
+Route::post('/add', 'App\Http\Controllers\roleController@add');
+//Route users
+
+Route::put('/tasks/{id}', [TacheController::class, 'updatecheck'])->name('tasks.update');
+
+Route::prefix('/admin')->middleware('auth', 'IsAdmin')->group(function () {
+
+    Route::resource('/user', UserrController::class);
+});
+Route::prefix('adminDr')->middleware('auth', 'IsAdminDr')->group(function () {
+
+    Route::get('/userCreatee', [UserrController::class, 'create']);
+});
