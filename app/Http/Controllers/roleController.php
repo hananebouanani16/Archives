@@ -35,13 +35,6 @@ class roleController extends Controller
             ->groupBy('modules.id', 'modules.nom_module')
             ->whereNull('modules.deleted_at')
             ->get();
-
-
-
-
-
-
-
         $rolesChunks = $roles->chunk(3);
         $permissions['o'] = Objet::all();
         $permissions['m'] = Objet::all();

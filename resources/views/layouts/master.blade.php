@@ -18,6 +18,8 @@
       <link rel="stylesheet" href="css/style.css">
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="css/responsive.css">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
    </head>
    <body class="sidebar-main-active right-column-fixed header-top-bgcolor">
 
@@ -103,7 +105,7 @@
                     </li>
                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Paramétrages</span></li>
 
-                     <li><a href="todo.html" class="iq-waves-effect" aria-expanded="false"><i class="ri-chat-check-line"></i><span>Directions</span></a></li>
+                     <li><a href="/directions" class="iq-waves-effect" aria-expanded="false"><i class="ri-chat-check-line"></i><span>Directions</span></a></li>
                      <li>
                         <a href="#userinfo" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>personnels</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">

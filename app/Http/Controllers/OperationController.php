@@ -23,9 +23,9 @@ class OperationController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
-            'type' => 'required|string|in:preuve de livraison,fiche de renseignement,fiche expedtion',
+            'type' => 'required|string|in:preuve de livraison,fiche de renseignements,fiche expedition',
             'creation_date' => 'required|date',
-            'experation_date' => 'required|date',
+            'expiration_date' => 'nullable|date|after_or_equal:creation_date', // Add validation for expiration_date
             'pdf_file' => 'required|mimes:pdf|max:4096',
         ]);
 
@@ -52,6 +52,7 @@ class OperationController extends Controller
             'type' => $request->type,
             'filter' => $request->filter,
             'creation_date' => $request->creation_date,
+            'expiration_date' => $request->expiration_date,  // Include expiration date
             'file_path' => 'pdfs/' . $subDir . '/' . $pdfFileName
         ]);
 

@@ -25,9 +25,9 @@ class groupe_userController extends Controller
         $elem['perm'] = Objet::all();
         $datas['admin'] = Auth::user()->type_utilisateur;
         $datas['c'] = DB::table('users')
-            ->join('personnels', 'personnels.IDPersonnels', '=', 'users.idperso')
+            ->join('personnels', 'personnels.id', '=', 'users.idperso')
             ->join('directions', 'directions.ID_DR5', '=', 'personnels.id_direction')
-            ->select('personnels.Nom_Personnels', 'users.id', 'users.name', 'users.tel', 'users.type_utilisateur', 'users.role', 'users.created_at', 'users.email', 'users.status', 'directions.Intitule_direction')
+            ->select('personnels.nom', 'users.id', 'users.name', 'users.type_utilisateur', 'users.role', 'users.created_at', 'users.email', 'personnels.situation_familiale', 'directions.Intitule_direction')
 
             ->get();
         $elem['user'] = NULL;
@@ -40,7 +40,7 @@ class groupe_userController extends Controller
 
 
             $dat = DB::table('users')
-                ->join('personnels', 'personnels.IDPersonnels', '=', 'users.idperso')
+                ->join('personnels', 'personnels.id', '=', 'users.idperso')
                 ->join('directions', 'directions.ID_DR5', '=', 'personnels.id_direction')
                 ->where('users.idperso', '=', $perso)
                 ->select('directions.ID_DR5')
@@ -52,7 +52,7 @@ class groupe_userController extends Controller
 
 
             $elem['user'] = DB::table('users')
-                ->join('personnels', 'personnels.IDPersonnels', '=', 'users.idperso')
+                ->join('personnels', 'personnels.id', '=', 'users.idperso')
                 ->join('directions', 'directions.ID_DR5', '=', 'personnels.id_direction')
                 ->select('users.id', 'users.name', 'users.tel', 'users.type_utilisateur', 'users.role', 'users.created_at', 'users.email', 'users.status', 'directions.num_parent', 'directions.Intitule_direction', 'personnels.Nom_Personnels', 'directions.ID_DR5')
                 ->where('directions.num_parent', '=', $dat->ID_DR5)

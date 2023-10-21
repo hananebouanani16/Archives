@@ -10,13 +10,22 @@ class HumainRessourceController extends Controller
 {
     public function index(Request $request)
     {
-        // Récupérer la valeur du filtre à partir de la demande HTTP
-        $filter = $request->input('filter'); // Supposons que le nom du champ du filtre est "filter" dans le formulaire
+        $filter = $request->filter; 
+    
+        // Start with a query
+        $query = HumanResource::query();
+    
+        // Check if it's an AJAX request
+        if ($request->ajax()) {
 
-        $documents = HumanResource::all();
-
+            $documents = $query->where('type', 'Evenement Familar')->where('filter',$filter)->get();
+            return view('rhs.table_rows', compact('documents'));  // assuming the blade file is named 'table.blade.php' in 'resources/views/partials' directory
+        }
+        $documents=HumanResource::all();
         return view('rhs.index', compact('documents', 'filter'));
     }
+    
+
     public function scan()
     {
 
@@ -24,7 +33,6 @@ class HumainRessourceController extends Controller
     }
     public function upload(Request $request)
     {
-        echo ('aaa');
         $request->validate([
             'title' => 'required|string',
             'type' => 'required|string|in:congé sans sold,Maternité,congé annuel,Maladi,Evenement Familar,contrat,passation',
